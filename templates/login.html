@@ -2,21 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} Weather</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" /> 
 </head>
+
 <body>
-    {% if flash.get('error') %}
-        <p class="error">{{ flash.get('error') }}</p>
-    {% endif %}
+    <h1>{{ title }} Weather</h1>
 
-    {% if current_user.is_authenticated %}
-        <p>Welcome, {{ current_user.username }}</p>
-    {% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
-    <form action="/login" method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" value="Login">
+    <p>{{ status }} and {{ temp }} &deg;</p>
+    <p>Feels like {{ feels_like }} &deg;</p>
+
+    <form action="/weather" method="GET">
+        <input type="text" name="city" id="city" placeholder="Enter a City" />
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
