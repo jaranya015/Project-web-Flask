@@ -2,29 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- Add any additional stylesheets or scripts you may need -->
 </head>
 <body>
     <h1>Login</h1>
 
-    <form action="{{ url_for('login') }}" method="post">
-        {% form_for form %}
-            <div class="form-group">
-                <label for="username">Username</label>
-                {{ form.username(class="form-control") }}
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                {{ form.password(class="form-control") }}
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        {% endform %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('login') }}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Login">
     </form>
 
-    {% if flash.get('error') %}
-        <div class="alert alert-danger" role="alert">
-            {{ flash.get('error') }}
-        </div>
-    {% endif %}
+    <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
 </body>
 </html>

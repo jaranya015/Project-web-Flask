@@ -38,7 +38,8 @@ def login():
             return redirect(url_for('index'))
         else:
             flash('Invalid username or password', 'error')
-            return redirect(url_for('login'))
+            return redirect(url_for('login.html'))
+    return render_template('login.html') 
         
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -96,5 +97,3 @@ def get_weather():
 
 if __name__ == "__main__" :
     serve(app, host="0.0.0.0",port=8000)
-    
-    app.run(debug=True)
