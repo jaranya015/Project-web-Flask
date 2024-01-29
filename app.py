@@ -30,7 +30,7 @@ def load_user(user_id):
 # หน้าหลัก
 @app.route('/')
 def home():
-    return 'หน้าหลักจ้า - ของคุณ' + current_user.id if current_user.is_authenticated else 'หน้าหลัก'
+    return 'หน้าหลัก - คุณ' + current_user.id if current_user.is_authenticated else 'หน้าหลัก'
 
 # หน้าล็อกอิน
 @app.route('/login', methods=['GET', 'POST'])

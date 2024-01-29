@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Weather Conditions</title>
-    <link href="{{ url_for('static', filename = 'styles/style.css')}} " rel="stylesheet" /> 
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"> 
 </head>
 <body>
+    {% if current_user.is_authenticated %}
+        <p>Welcome, {{ current_user.name }}!</p>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a>.</p>
+    {% endif %}
+
     <h1>Get Weather Conditions</h1>
     <form id="weatherForm" action="/weather" method="GET">
-        <input type="text" name = "city" id = "city" 
-        placeholder="Enter a City" />
+        <input type="text" name="city" id="city" placeholder="Enter a City" />
         <button type="submit">Submit</button>
     </form>
 </body>
