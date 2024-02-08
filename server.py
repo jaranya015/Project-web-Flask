@@ -19,7 +19,7 @@ login_manager.login_view = 'login'
 login_manager.init_app(app)
 
 db.init_app(app)
-migrate = Migrate(app, db) 
+# migrate = Migrate(app, db) 
 
 # @app.route('/download')
 # def download():
