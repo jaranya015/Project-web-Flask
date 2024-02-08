@@ -1,10 +1,10 @@
 # http://127.0.0.1:8000/
 from flask import send_file
-from flask_migrate import Migrate
+#from flask_migrate import Migrate
 from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages
 from weather import get_current_weather
-from heart import beat
-import turtle
+# from heart import beat
+# import turtle
 from models import db, User
 from waitress import serve
 from flask_sqlalchemy import SQLAlchemy
@@ -21,15 +21,15 @@ login_manager.init_app(app)
 db.init_app(app)
 migrate = Migrate(app, db) 
 
-@app.route('/download')
-def download():
-    beat()
-    return render_template('download.html')
+# @app.route('/download')
+# def download():
+#     beat()
+#     return render_template('download.html')
 
-@app.route('/download_file')
-def download_file():
-    # Logic การดาวน์โหลดไฟล์ เช่น ดึงไฟล์จากแหล่งเก็บข้อมูล
-    return send_file('path/to/file', as_attachment=True)
+# @app.route('/download_file')
+# def download_file():
+#     # Logic การดาวน์โหลดไฟล์ เช่น ดึงไฟล์จากแหล่งเก็บข้อมูล
+#     return send_file('path/to/file', as_attachment=True)
 
 
 @login_manager.user_loader
